@@ -33,7 +33,7 @@ public class Student {
   
   // The Student's name
   @NotNull
-  private String name;
+  private String firstName;
 
   // ------------------------
   // PUBLIC METHODS
@@ -47,7 +47,7 @@ public class Student {
   
   public Student(String email, String name) {
     this.email = email;
-    this.name = name;
+    this.firstName = name;
   }
 
   // Getter and setter methods
@@ -68,12 +68,12 @@ public class Student {
     this.email = value;
   }
   
-  public String getName() {
-    return name;
+  public String getFirstName() {
+    return firstName;
   }
 
-  public void setName(String value) {
-    this.name = value;
+  public void setFirstName(String value) {
+    this.firstName = value;
   }
   
 }
