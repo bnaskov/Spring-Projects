@@ -1,0 +1,55 @@
+pom.xml
+<dependency>
+	<groupId>io.springfox</groupId>
+	<artifactId>springfox-swagger2</artifactId>
+	<version>${swagger.version}</version>
+</dependency>
+
+<dependency>
+	<groupId>io.springfox</groupId>
+	<artifactId>springfox-swagger-ui</artifactId>
+	<version>${swagger.version}</version>
+</dependency>
+
+---
+@EnableSwagger2
+@Configuration
+public class SwaggerConfig
+{
+	@Bean
+	public Docket restfulApi() {
+		return new Docket(DocumentationType.SWAGGER_2)
+			.groupName("restful-api")
+			.select()
+			.build()
+			.apiInfo(apiInfo());
+	}
+
+	private ApiInfo apiInfo() {
+
+		return new ApiInfoBuilder()
+			.title("Application Name")
+			.version("1.0").build();
+	}
+}
+
+---
+@EnableWebMvc
+@Configuration
+public class WebAppInitializer extends WebMvcConfigurerAdapter implements WebApplicationInitializer
+
+@Override
+public void addResourceHandlers(ResourceHandlerRegistry registry)
+{
+	registry.addResourceHandler("swagger-ui.html")
+		.addResourceLocations("classpath:/META-INF/resources/");
+
+	registry.addResourceHandler("/webjars/**")
+		.addResourceLocations("classpath:/META-INF/resources/webjars/");
+}
+
+@Override
+public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer)
+{
+	configurer.enable();
+}
